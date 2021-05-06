@@ -142,7 +142,7 @@ router.get("/logs", auth, (req, res) => {
     res.send(req.rootUser.logs)
 })
 
-router.post("/addlogs", validateLogs, isRequestValid, auth, async (req, res) => {
+router.post("/addlogs", auth, validateLogs, isRequestValid, auth, async (req, res) => {
 
     const { phone, text, date } = req.body;
 
