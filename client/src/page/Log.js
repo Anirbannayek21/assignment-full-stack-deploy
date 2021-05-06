@@ -8,6 +8,7 @@ import { userContext } from '../App';
 import { Search } from '@material-ui/icons';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useHistory } from 'react-router';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -44,6 +45,7 @@ const defaultData = {
 }
 
 const Log = () => {
+    const history = useHistory();
     const classes = useStyles();
     const [open, setopen] = useState(false)
     const [users, setusers] = useState([])
@@ -103,6 +105,9 @@ const Log = () => {
                 hideProgressBar: false,
                 closeOnClick: true,
             })
+            if (error.response.data.message === "User not found") {
+                setTimeout(() => { history.push("/signin") }, 2000)
+            }
         })
     }
 
