@@ -109,11 +109,11 @@ router.post("/update", async (req, res) => {
     const { _id, name, email, password } = req.body;
 
     if (password !== "") {
-        await Users.findByIdAndUpdate({ _id: _id }, {
-            name: name,
-            email: email,
-            password: password
-        }).then((result) => {
+        await Users.findById({ _id: _id }).then((result) => {
+            result.name = name
+            result.email = email
+            result.password = password
+            result.save();
             return res.status(200).json({ message: "updated successfully" })
         }).catch((error) => console.log(error))
     }
