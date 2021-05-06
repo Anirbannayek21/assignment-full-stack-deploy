@@ -128,7 +128,13 @@ const Admin = () => {
 
     const update = () => {
         axios.post("/user/update", editData).then((result) => {
-            console.log(result.data.message);
+            toast.success(result.data.message, {
+                position: "top-center",
+                autoClose: 1000,
+                hideProgressBar: false,
+                closeOnClick: true,
+            });
+            seteditData(defaulteditData)
         }).catch((error) => console.log(error))
 
         setopenedit(false)
